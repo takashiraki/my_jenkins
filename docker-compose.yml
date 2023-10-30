@@ -1,0 +1,21 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:latest
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+    ports:
+      - ${PORT}:8080
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+    networks:
+      - my_proxy_network
+      - jenkins_network
+
+networks:
+  jenkins_network:
+    name: jenkins_network
+  my_proxy_network:
+    external: true
+    name: my_proxy_network
